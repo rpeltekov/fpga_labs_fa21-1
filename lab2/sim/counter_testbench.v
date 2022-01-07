@@ -31,6 +31,12 @@ module counter_testbench();
         // your counter and its clock enable/disable functionality.
 
 
+		ce = 1;
+		repeat(10) @(posedge clock);
+		assert (LEDS == 4'd0);
+		repeat (`SECOND) @(posedge clock);
+		assert (LEDS == 4'd1);
+
         `ifndef IVERILOG
             $vcdplusoff;
         `endif

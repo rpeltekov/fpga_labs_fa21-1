@@ -14,6 +14,8 @@ module adder_testbench();
         .sum(sum)
     );
 
+	integer ai, bi;
+
     initial begin
         `ifdef IVERILOG
             $dumpfile("adder_testbench.fst");
@@ -40,6 +42,16 @@ module adder_testbench();
             $error("Expected sum to be 20, a: %d, b: %d, actual value: %d", a, b, sum);
             $fatal(1);
         end
+
+		for (ai = 0; ai < 1024; ai = ai + 1) begin
+			a = $urandom();
+			b = $urandom();
+			#(2);
+			if (sum != a + b) begin
+				$error("Expected sum to be %d, a: %d, b: %d, actual value: %d", a + b, a, b, sum);
+				$fatal(1);
+			end
+		end
 
         `ifndef IVERILOG
             $vcdplusoff;

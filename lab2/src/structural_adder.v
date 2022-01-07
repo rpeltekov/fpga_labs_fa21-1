@@ -17,11 +17,5 @@ module structural_adder (
 			);
 		end
 	endgenerate
-	assign sum[14] = carry[14]
-
-
-
-
-
-
+	assign sum[14] = carry[14];
 endmodule
